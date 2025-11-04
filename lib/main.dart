@@ -1,102 +1,42 @@
 import 'package:flutter/material.dart';
+import 'pages/home_page.dart';
+import 'pages/catalog_page.dart';
+import 'pages/promotions_page.dart';
+import 'pages/about_page.dart';
 
-void main() => runApp(const SignUpApp());
+void main() => runApp(const MagnitCosmeticsApp());
 
-class SignUpApp extends StatelessWidget {
-  const SignUpApp();
+class MagnitCosmeticsApp extends StatelessWidget {
+  const MagnitCosmeticsApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        '/': (context) => const SignUpScreen(),
-      },
-    );
-  }
-}
-
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
-      body: const Center(
-        child: SizedBox(
-          width: 400,
-          child: Card(
-            child: SignUpForm(),
-          ),
+      title: 'Магнит Косметикс',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: const Color(0xFFE31E24), // Magnit red
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFFE31E24),
+          primary: const Color(0xFFE31E24),
+          secondary: const Color(0xFFFF6B6B),
         ),
+        scaffoldBackgroundColor: Colors.white,
+        fontFamily: 'Roboto',
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          elevation: 1,
+        ),
+        useMaterial3: true,
       ),
-    );
-  }
-}
-
-class SignUpForm extends StatefulWidget {
-  const SignUpForm();
-
-  @override
-  State<SignUpForm> createState() => _SignUpFormState();
-}
-
-class _SignUpFormState extends State<SignUpForm> {
-  final _firstNameTextController = TextEditingController();
-  final _lastNameTextController = TextEditingController();
-  final _usernameTextController = TextEditingController();
-
-  double _formProgress = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          LinearProgressIndicator(value: _formProgress),
-          Text('Sign up', style: Theme.of(context).textTheme.headlineMedium),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: TextFormField(
-              controller: _firstNameTextController,
-              decoration: const InputDecoration(hintText: 'First name'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: TextFormField(
-              controller: _lastNameTextController,
-              decoration: const InputDecoration(hintText: 'Last name'),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: TextFormField(
-              controller: _usernameTextController,
-              decoration: const InputDecoration(hintText: 'Username'),
-            ),
-          ),
-          TextButton(
-            style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.resolveWith(
-                      (Set<MaterialState> states) {
-                    return states.contains(MaterialState.disabled)
-                        ? null
-                        : Colors.white;
-                  }),
-              backgroundColor: MaterialStateProperty.resolveWith(
-                      (Set<MaterialState> states) {
-                    return states.contains(MaterialState.disabled)
-                        ? null
-                        : Colors.blue;
-                  }),
-            ),
-            onPressed: null,
-            child: const Text('Sign up'),
-          ),
-        ],
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/catalog': (context) => const CatalogPage(),
+        '/promotions': (context) => const PromotionsPage(),
+        '/about': (context) => const AboutPage(),
+      },
     );
   }
 }
