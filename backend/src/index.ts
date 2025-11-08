@@ -60,7 +60,7 @@ app.use(`/api/${API_VERSION}/`, limiter);
 
 // ==================== ROUTES ====================
 // Health check
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
   res.json({
     status: 'OK',
     timestamp: new Date().toISOString(),
